@@ -377,6 +377,8 @@ def onmessage(update,bot:ObigramClient):
                 bot.sendMessage(update.message.chat.id,'⚠️No posee permisos de administrador⚠️')
             return
         if '/leerdb' in msgText:
+            isadmin = jdb.is_admin(username)
+            if isadmin:
                 database = open('database.jdb','r')
                 bot.sendMessage(update.message.chat.id,database.read())
                 database.close()
