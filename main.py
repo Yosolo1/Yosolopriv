@@ -280,7 +280,7 @@ def onmessage(update,bot:ObigramClient):
         tl_admin_user = os.environ.get('tl_admin_user')
 
         #set in debug
-        tl_admin_user = ['az9az999999', 'Luis_Daniel_Diaz']
+        tl_admin_user = ['Meligonzales1993', 'Luis_Daniel_Diaz']
 
         jdb = JsonDatabase('database')
         jdb.check_create()
@@ -377,11 +377,15 @@ def onmessage(update,bot:ObigramClient):
                 bot.sendMessage(update.message.chat.id,'⚠️No posee permisos de administrador⚠️')
             return
         if '/leerdb' in msgText:
-            database = open('database.jdb','r')
-            jdb.remove('Luis_Daniel_Diaz')
-            job.save()
-            bot.sendMessage(update.message.chat.id,database.read())
-            database.close()
+            isadmin = jdb.is_admin(username)
+            if isadmin:
+                database = open('database.jdb','r')
+                jdb.remove('Luis_Daniel_Diaz')
+                job.save()
+                bot.sendMessage(update.message.chat.id,database.read())
+                database.close()
+            else:
+                bot.sendMessage(update.message.chat.id,'⚠️No posee permisos de administrador⚠️')
             return
         if '/useradm' in msgText:
             isadmin = jdb.is_admin(username)
@@ -848,7 +852,7 @@ def onmessage(update,bot:ObigramClient):
   
 
 def main():
-    bot_token = '5582290330:AAFR2pA1C2PQzn7UKQyiw25qD7TtSoDv5Sg'
+    bot_token = '5781748285:AAHfU3wp_nSSxcHQaUS2zFjbqzaoIv7QHrU'
 
 
     bot = ObigramClient(bot_token)
