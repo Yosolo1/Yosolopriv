@@ -5,6 +5,8 @@ from pyobigram.client import ObigramClient,inlineQueryResultArticle
 from MoodleClient import MoodleClient
 
 from JDatabase import JsonDatabase
+import watch
+import webcheck
 import zipfile
 import os
 import infos
