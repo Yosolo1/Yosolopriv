@@ -461,6 +461,17 @@ def onmessage(update,bot:ObigramClient):
                             bot.editMessageText(message273,"TypeError: "+str(ex))    
                 else: bot.editMessageText(message,"No ha puesto sus credenciales")    
                 return
+        if '/watch' in msgText:
+            import requests
+            url = user_info['moodle_host']
+            msg2134=bot.editMessageText(message,f"Escaneando url guardado en info")
+            try:
+             r = requests.head(url)
+             if r.status_code == 200 or r.status_code == 303:
+                bot.editMessageText(msg2134,f"Pagina: {url} activa")
+             else: bot.editMessageText(msg2134,f"Pagina: {url} caida")
+            except Exception as ex:
+                bot.editMessageText(message,"Error al escanear"+str(ex))
 
         if '/help' in msgText:
             message = bot.sendMessage(update.message.chat.id,'🙃')
