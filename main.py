@@ -491,7 +491,7 @@ def onmessage(update,bot:ObigramClient):
             bot.sendMessage(update.message.chat.id,comandos.read())
             información.close()
             return
-        if '/myuser' in msgText:
+        if '/info' in msgText:
             getUser = user_info
             if getUser:
                 statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
@@ -721,8 +721,8 @@ def onmessage(update,bot:ObigramClient):
             start_msg = '╭───ⓘ🌟𝔹𝕆𝕋 𝕀ℕ𝕀ℂ𝕀𝔸𝔻𝕆🌟─〄\n│\n'
             start_msg+= '├🤖Hola @' + str(username)+'\n│\n'
             start_msg+= '├࿇ ══━━━━✥◈✥━━━━══ ࿇\n│\n'
-            start_msg+= '├☺️! Bienvenid@ al bot de descargas gratis SuperDownload en su versión 1.5🌟!\n'
-            start_msg+= '├🙂Si necesita ayuda o información utilice:\n│\n'
+            start_msg+= '├☺️!Bienvenid@ al bot SuperDownload 1.5🌟!\n'
+            start_msg+= '├🙂Si necesitas ayuda o información utilice:\n│\n'
             start_msg+= '├/help\n'
             start_msg+= '├/about\n'
             start_msg+= '├/config\n│\n'
@@ -847,7 +847,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"🗑Configuracion Eliminada🗑")
+            bot.editMessageText(message,"🗑Configuracion eliminada🗑")
 
         elif '/delete_prox' in msgText: 
             getUser = user_info
@@ -869,7 +869,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Aulacened cargada")
+            bot.editMessageText(message,"✅Configuración de Aulacened cargada...")
            
         elif '/uclv' in msgText:
             getUser = user_info
@@ -882,7 +882,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Uclv cargada")
+            bot.editMessageText(message,"✅Configuración de Uclv cargada...")
 
         elif '/uvs' in msgText:
             getUser = user_info
@@ -895,7 +895,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Uvs cargada")
+            bot.editMessageText(message,"✅Configuración de Uvs cargada...")
 
         elif '/evea' in msgText:
             getUser = user_info
@@ -908,7 +908,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Evea cargada")
+            bot.editMessageText(message,"✅Configuración de Evea cargada...")
         
         elif '/cursos' in msgText:
             getUser = user_info
@@ -921,7 +921,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Cursos cargada")
+            bot.editMessageText(message,"✅Configuración de Cursos cargada...")
         
         elif '/eva' in msgText:
             getUser = user_info
@@ -934,7 +934,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Eva cargada")
+            bot.editMessageText(message,"✅Configuración de Eva cargada...")
         
         elif "/artem" in msgText:
             getUser = user_info
@@ -947,7 +947,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Aula Artemisa cargada")
+            bot.editMessageText(message,"✅Configuración de Aula Artemisa cargada...")
             
         elif '/eduvirtual' in msgText:
             getUser = user_info
@@ -960,7 +960,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Eduvirtual cargada")
+            bot.editMessageText(message,"✅Configuración de Eduvirtual cargada...")
         
         elif "/gtm" in msgText:
             getUser = user_info
@@ -973,7 +973,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Aula Guantanamo cargada")
+            bot.editMessageText(message,"✅Configuración de Aula Guantanamo cargada...")
         ###################################################     
   
         elif '/del_' in msgText and user_info['cloudtype']=='moodle':
