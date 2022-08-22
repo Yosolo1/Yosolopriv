@@ -491,7 +491,7 @@ def onmessage(update,bot:ObigramClient):
             bot.sendMessage(update.message.chat.id,comandos.read())
             información.close()
             return
-        if '/myuser' in msgText:
+        if '/info' in msgText:
             getUser = user_info
             if getUser:
                 statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
