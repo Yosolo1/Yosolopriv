@@ -429,6 +429,38 @@ def onmessage(update,bot:ObigramClient):
                 statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
                 bot.sendMessage(update.message.chat.id,statInfo)
             return
+        if '/login' in msgText:
+             import requests
+             getUser = user_info
+             if getUser:
+                user = getUser['moodle_user']
+                passw = getUser['moodle_password']
+                host = getUser['moodle_host']
+                proxy = getUser['proxy']
+                url = host
+                r = requests.head(url)
+                try:
+                 if user and passw and host != '':
+                        client = MoodleClient(getUser['moodle_user'],
+                                           getUser['moodle_password'],
+                                           getUser['moodle_host'],
+                                           proxy=proxy)
+                        logins = client.login()
+                        if logins:
+                                bot.editMessageText(message,"Conexion Ready :D")  
+                                return
+                        else: 
+                            bot.editMessageText(message,"Error al conectar")
+                            message273= bot.sendMessage(update.message.chat.id,"Escaneando pagina...")
+                            if r.status_code == 200 or r.status_code == 303:
+                                bot.editMessageText(message273,f"Estado de la pagina: {r}\nRevise si su cuenta no haya sido baneada")
+                                return
+                            else: bot.editMessageText(message273,f"Pagina caida, estado: {r}")    
+                            return
+                except Exception as ex:
+                            bot.editMessageText(message273,"TypeError: "+str(ex))    
+                else: bot.editMessageText(message,"No ha puesto sus credenciales")    
+                return
 
         if '/help' in msgText:
             message = bot.sendMessage(update.message.chat.id,'🙃')
@@ -745,6 +777,23 @@ def onmessage(update,bot:ObigramClient):
                 bot.editMessageText(message,'🧐')
                 message = bot.sendMessage(update.message.chat.id,'⚠️Error y posibles causas:\n1-Revise su Cuenta\n2-Servidor Desabilitado: '+client.path)
              pass
+        elif '/delete' in msgText:
+           try: 
+            enlace = msgText.split('/delete')[-1]
+            proxy = ProxyCloud.parse(user_info['proxy'])
+            client = MoodleClient(user_info['moodle_user'],
+                                   user_info['moodle_password'],
+                                   user_info['moodle_host'],
+                                   user_info['moodle_repo_id'],
+                                   proxy=proxy)
+            loged= client.login()
+            if loged:
+                #update.message.chat.id
+                deleted = client.delete(enlace)
+
+                bot.sendMessage(update.message.chat.id, "✅Archivo eliminado con exito.•°🗑️")
+            else: bot.sendMessage(update.message.chat.i, "😰No fue posible loguearse.")            
+           except: bot.sendMessage(update.message.chat.id, "❌No fue posible eliminar el archivo.")
         elif '/token' in msgText:
             message2 = bot.editMessageText(message,'🤖Obteniendo Token, por favor espere🙂...')
 
