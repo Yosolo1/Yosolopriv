@@ -14,8 +14,8 @@ def text_progres(index,max):
 		index_make = 1
 		make_text += '\n['
 		while(index_make<20):
-			if porcent >= index_make * 5: make_text+= '◾'
-			else: make_text+= '◽'
+			if porcent >= index_make * 5: make_text+= '▪'
+			else: make_text+= '▫'
 			index_make+=1
 		make_text += ']\n'
 		return make_text
@@ -29,27 +29,27 @@ def porcent(index,max):
     return porcent
 
 def createDownloading(filename,totalBits,currentBits,speed,time,tid=''):
-    msg = '╭──⊸📥𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝙽𝙳𝙾📡... \n\n'
+    msg = '╭──⊸📥𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝙽𝙳𝙾📡... \n│\n'
     msg+= '├➢Nombre: ' + str(filename)+'\n'
     msg+= '├➢Tamaño total: ' + str(sizeof_fmt(totalBits))+'\n'
     msg+= '├➢Descargado: ' + str(sizeof_fmt(currentBits))+'\n'
     msg+= '├➢Velocidad: ' + str(sizeof_fmt(speed))+'/s\n'
     msg+= '╰➢Tiempo restante: ' + str(datetime.timedelta(seconds=int(time))) +'\n\n'
 
-    msg = '╭──⊸📥𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝙽𝙳𝙾 𝙰𝚁𝙲𝙷𝙸𝚅𝙾📡...\n\n'
+    msg = '╭──⊸📥𝙳𝙴𝚂𝙲𝙰𝚁𝙶𝙰𝙽𝙳𝙾 𝙰𝚁𝙲𝙷𝙸𝚅𝙾📡...\n│\n'
     msg += '├➢Archivo: '+filename+'\n'
     msg += text_progres(currentBits,totalBits)+'\n'
-    msg += '├➢Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n\n'
-    msg += '├➢Tamaño total: '+sizeof_fmt(totalBits)+'\n\n'
-    msg += '├➢Descargado: '+sizeof_fmt(currentBits)+'\n\n'
-    msg += '├➢Velocidad: '+sizeof_fmt(speed)+'/s\n\n'
+    msg += '├➢Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n│\n'
+    msg += '├➢Tamaño total: '+sizeof_fmt(totalBits)+'\n│\n'
+    msg += '├➢Descargado: '+sizeof_fmt(currentBits)+'\n│\n'
+    msg += '├➢Velocidad: '+sizeof_fmt(speed)+'/s\n│\n'
     msg += '╰➢Tiempo restante: '+str(datetime.timedelta(seconds=int(time)))+'s\n\n'
 
     if tid!='':
         msg+= '/cancel_' + tid
     return msg
 def createUploading(filename,totalBits,currentBits,speed,time,originalname=''):
-    msg = '╭──⊸📤𝚂𝚄𝙱𝙸𝙴𝙽𝙳𝙾 𝙰 𝙻𝙰 𝙽𝚄𝙱𝙴☁️... \n\n'
+    msg = '╭──⊸📤𝚂𝚄𝙱𝙸𝙴𝙽𝙳𝙾 𝙰 𝙻𝙰 𝙽𝚄𝙱𝙴☁️... \n│\n'
     msg+= '├➢Archivo: ' + str(filename)+'\n'
     if originalname!='':
         msg = str(msg).replace(filename,originalname)
@@ -59,21 +59,21 @@ def createUploading(filename,totalBits,currentBits,speed,time,originalname=''):
     msg+= '├➢Velocidad: ' + str(sizeof_fmt(speed))+'/s\n'
     msg+= '╰➢Tiempo restante: ' + str(datetime.timedelta(seconds=int(time))) +'\n'
 
-    msg = '╭──⊸📤𝚂𝚄𝙱𝙸𝙴𝙽𝙳𝙾 𝙰 𝙻𝙰 𝙽𝚄𝙱𝙴☁️...\n\n'
+    msg = '╭──⊸📤𝚂𝚄𝙱𝙸𝙴𝙽𝙳𝙾 𝙰 𝙻𝙰 𝙽𝚄𝙱𝙴☁️...\n│\n'
     msg += '├➢Nombre: '+filename+'\n'
     if originalname!='':
         msg = str(msg).replace(filename,originalname)
         msg+= '├➢Parte: ' + str(filename)+'\n'
     msg += text_progres(currentBits,totalBits)+'\n'
-    msg += '├➢Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n\n'
-    msg += '├➢Tamaño total: '+sizeof_fmt(totalBits)+'\n\n'
-    msg += '├➢Subido: '+sizeof_fmt(currentBits)+'\n\n'
-    msg += '├➢Velocidad: '+sizeof_fmt(speed)+'/s\n\n'
+    msg += '├➢Porcentaje: '+str(porcent(currentBits,totalBits))+'%\n│\n'
+    msg += '├➢Tamaño total: '+sizeof_fmt(totalBits)+'\n│\n'
+    msg += '├➢Subido: '+sizeof_fmt(currentBits)+'\n│\n'
+    msg += '├➢Velocidad: '+sizeof_fmt(speed)+'/s\n│\n'
     msg += '╰➢Tiempo restante: '+str(datetime.timedelta(seconds=int(time)))+'s\n\n'
 
     return msg
 def createCompresing(filename,filesize,splitsize):
-    msg = '╭──⊸🗜️𝙲𝙾𝙼𝙿𝚁𝙸𝙼𝙸𝙴𝙽𝙳𝙾🗜️... \n\n'
+    msg = '╭──⊸🗜️𝙲𝙾𝙼𝙿𝚁𝙸𝙼𝙸𝙴𝙽𝙳𝙾🗜️... \n│\n'
     msg+= '├➢Nombre: ' + str(filename)+'\n'
     msg+= '├➢Tamaño Total: ' + str(sizeof_fmt(filesize))+'\n'
     msg+= '╰➢Tamaño de Partes: ' + str(sizeof_fmt(splitsize))+'\n'
@@ -81,7 +81,7 @@ def createCompresing(filename,filesize,splitsize):
 
     return msg
 def createFinishUploading(filename,filesize,split_size,current,count,findex):
-    msg = '╭──⊸✅𝙿𝚁𝙾𝙲𝙴𝚂𝙾 𝙵𝙸𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙾✅─〄\n\n'
+    msg = '╭──⊸✅𝙿𝚁𝙾𝙲𝙴𝚂𝙾 𝙵𝙸𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙾✅─〄\n│\n'
     msg+= '├➢༺@' + str(username)+'༻\n'
     msg+= '├➢Nombre: ' + str(filename)+'\n'
     msg+= '├➢Tamaño Total: ' + str(sizeof_fmt(filesize))+'\n'
