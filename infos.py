@@ -124,7 +124,7 @@ def createStat(username,userdata,isadmin):
     msg+= '├➢Nombre: ༺@' + str(username)+'༻\n'
     msg+= '├➢Usuario: ' + str(userdata['moodle_user'])+'\n'
     msg+= '├➢Contraseña: ' + str(userdata['moodle_password'])+'\n'
-    msg+= '├➢Url de nube: ' + str(userdata['moodle_host'])+'\n'
+    msg+= '├➢URL nube: ' + str(userdata['moodle_host'])+'\n'
     if userdata['cloudtype'] == 'moodle':
         msg+= '├➢Repo ID: ' + str(userdata['moodle_repo_id'])+'\n'
     msg+= '├➢Tipo de almacén: ' + str(userdata['cloudtype'])+'\n'
