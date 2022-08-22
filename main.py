@@ -146,29 +146,41 @@ def processUploadFiles(filename,filesize,files,update,bot,message,thread=None,jd
         bot.editMessageText(message,f'⚠️𝙴𝚛𝚛𝚘𝚛 {str(ex)}⚠️')
 
 
-def processFile(update,bot,message,file,thread=None,jdb=None):
+def processFile(update,bot,message,file,obten_name,thread=None,jdb=None):
     file_size = get_file_size(file)
+    ext = file.split('.')[-1]
+    if '7z.' in file:
+        ext1 = file.split('.')[-2]
+        ext2 = file.split('.')[-1]
+        name = obten_name + '.'+ext1+'.'+ext2
+        
+    else:
+        name = obten_name + '.'+ext
+        
+    os.rename(file,name)
+    print(name)
     getUser = jdb.get_user(update.message.sender.username)
     max_file_size = 1024 * 1024 * getUser['zips']
     file_upload_count = 0
     client = None
     findex = 0
     if file_size > max_file_size:
-        compresingInfo = infos.createCompresing(file,file_size,max_file_size)
+        compresingInfo = infos.createCompresing(name,file_size,max_file_size)
         bot.editMessageText(message,compresingInfo)
-        zipname = str(file).split('.')[0] + createID()
+        #zipname = str(name).split('.')[0] + createID()
+        zipname = str(name).split('.')[0]
         mult_file = zipfile.MultiFile(zipname,max_file_size)
         zip = zipfile.ZipFile(mult_file,  mode='w', compression=zipfile.ZIP_DEFLATED)
-        zip.write(file)
+        zip.write(name)
         zip.close()
         mult_file.close()
-        client = processUploadFiles(file,file_size,mult_file.files,update,bot,message,jdb=jdb)
+        client = processUploadFiles(name,file_size,mult_file.files,update,bot,message,jdb=jdb)
         try:
-            os.unlink(file)
+            os.unlink(name)
         except:pass
         file_upload_count = len(zipfile.files)
     else:
-        client = processUploadFiles(file,file_size,[file],update,bot,message,jdb=jdb)
+        client = processUploadFiles(name,file_size,[name],update,bot,message,jdb=jdb)
         file_upload_count = 1
     bot.editMessageText(message,'📦𝙿𝚛𝚎𝚙𝚊𝚛𝚊𝚗𝚍𝚘 𝚊𝚛𝚌𝚑𝚒𝚟𝚘📄...')
     evidname = ''
@@ -177,7 +189,7 @@ def processFile(update,bot,message,file,thread=None,jdb=None):
         if getUser['cloudtype'] == 'moodle':
             if getUser['uploadtype'] == 'evidence':
                 try:
-                    evidname = str(file).split('.')[0]
+                    evidname = str(name).split('.')[0]
                     txtname = evidname + '.txt'
                     evidences = client.getEvidences()
                     for ev in evidences:
@@ -204,7 +216,7 @@ def processFile(update,bot,message,file,thread=None,jdb=None):
             txtname = str(name).split('/')[-1].split('.')[0] + '.txt'
             sendTxt(txtname,files,update,bot)
     else:
-        bot.editMessageText(message,'⚠ Hubo un error ⚠')
+        bot.editMessageText(message,'⚠️𝙴𝚛𝚛𝚘𝚛 𝚎𝚗 𝚕𝚊 𝚗𝚞𝚋𝚎⚠️')
 
 def ddl(update,bot,message,url,file_name='',thread=None,jdb=None):
     downloader = Downloader()
