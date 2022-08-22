@@ -126,7 +126,7 @@ def createStat(username,userdata,isadmin):
     msg+= '├➢Contraseña: ' + str(userdata['moodle_password'])+'\n'
     msg+= '├➢Url de nube: ' + str(userdata['moodle_host'])+'\n'
     if userdata['cloudtype'] == 'moodle':
-        msg+= '├Repo ID: ' + str(userdata['moodle_repo_id'])+'\n'
+        msg+= '├➢Repo ID: ' + str(userdata['moodle_repo_id'])+'\n'
     msg+= '├➢Tipo de almacén: ' + str(userdata['cloudtype'])+'\n'
     msg+= '├➢Tipo de subida: ' + str(userdata['uploadtype'])+'\n'
     if userdata['cloudtype'] == 'cloud':
@@ -146,6 +146,6 @@ def createStat(username,userdata,isadmin):
     msg+= '├➢Proxy: ' + proxy + '\n'
     msg+= '├➢Encriptar: ' + tokenize + '\n'
     msg+= '│' + '\n'
-    msg+= '╰ⓘSuperDownload 1.5🌟─〄\n\n'
+    msg+= '╰──ⓘSuperDownload 1.5🌟─〄\n\n'
     return msg
     
