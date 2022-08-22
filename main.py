@@ -96,18 +96,19 @@ def processUploadFiles(filename,filesize,files,update,bot,message,thread=None,jd
                     while resp is None:
                           if user_info['uploadtype'] == 'evidence':
                              fileid,resp = client.upload_file(f,evidence,fileid,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                          elif user_info['uploadtype'] == 'draft':
-                                fileid,resp = client.upload_file_draft(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
-                          elif user_info['uploadtype'] == 'perfil':
-                                fileid,resp = client.upload_file_perfil(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
-                          elif user_info['uploadtype'] == 'blog':
-                                fileid,resp = client.upload_file_blog(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
-                          elif user_info['uploadtype'] == 'calendar':
-                                fileid,resp = client.upload_file_calendar(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'draft':
+                             fileid,resp = client.upload_file_draft(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'blog':
+                             fileid,resp = client.upload_file_blog(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'calendar':
+                             fileid,resp = client.upload_file_calendar(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'calendarevea':
+                             fileid,resp = client.upload_file_calendarevea(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
                           iter += 1
                           if iter>=10:
                               break
@@ -187,7 +188,7 @@ def processFile(update,bot,message,file,thread=None,jdb=None):
                            findex+=1
                     client.logout()
                 except:pass
-            if getUser['uploadtype'] == 'draft' or getUser['uploadtype'] == 'blog' or getUser['uploadtype'] == 'calendar' or getUser['uploadtype'] == 'perfil':
+            if getUser['uploadtype'] == 'draft' or getUser['uploadtype'] == 'blog' or getUser['uploadtype']=='calendar' or getUser['uploadtype']=='calendarevea':
                for draft in client:
                    files.append({'name':draft['file'],'directurl':draft['url']})
         else:
@@ -212,18 +213,6 @@ def ddl(update,bot,message,url,file_name='',thread=None,jdb=None):
         if file:
             processFile(update,bot,message,file,jdb=jdb)
 
-def sendTxt(name,files,update,bot):
-                txt = open(name,'w')
-                fi = 0
-                for f in files:
-                    separator = ''
-                    if fi < len(files)-1:
-                        separator += '\n'
-                    txt.write(f['directurl']+separator)
-                    fi += 1
-                txt.close()
-                bot.sendFile(update.message.chat.id,name)
-                os.unlink(name)
 def sendTxt(name,files,update,bot):
                 txt = open(name,'w')
                 fi = 0
@@ -825,14 +814,14 @@ def onmessage(update,bot:ObigramClient):
             except Exception as ex:
                 bot.editMessageText(message2,'⚠️La moodle '+client.path+' no tiene Token o revise la cuenta⚠️')
         elif '/config' in msgText:
-            msg_nub = "💡LISTA DE NUBES\n"
-            msg_nub += "☁️ UCLV ☛ /uclv\n"
-            msg_nub += "☁️ Aulacened ☛ /aulacened\n"
-            msg_nub += "☁️ Cursos ☛ /cursos\n"
-            msg_nub += "☁️ Evea ☛ /evea\n"
-            msg_nub += "☁️ Eduvirtual ☛ /eduvirtual\n"
-            msg_nub += "☁️ Eva ☛ /eva\n"
-            msg_nub += "☁️ Art.sld ☛ /artem\n"   
+            msg_nub = "╭───ⓘ💡LISTA DE NUBES PRECONFIGURADAS:\n"
+            msg_nub += "├➢☁️ UCLV ☛ /uclv\n"
+            msg_nub += "├➢☁️ Aulacened ☛ /aulacened\n"
+            msg_nub += "├➢☁️ Cursos ☛ /cursos\n"
+            msg_nub += "├➢☁️ Evea ☛ /evea\n"
+            msg_nub += "├➢☁️ Eduvirtual ☛ /eduvirtual\n"
+            msg_nub += "├➢☁️ Eva ☛ /eva\n"
+            msg_nub += "╰➢☁️ Art.sld ☛ /artem\n"   
             bot.editMessageText(message,msg_nub)
 
         elif '/delconf' in msgText:
@@ -847,7 +836,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"🗑Configuracion Eliminada🗑")
+            bot.editMessageText(message,"🗑Configuración Eliminada🗑")
 
         elif '/delete_prox' in msgText: 
             getUser = user_info
@@ -869,7 +858,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Aulacened cargada")
+            bot.editMessageText(message,"✅Configuración de Aulacened cargada...")
            
         elif '/uclv' in msgText:
             getUser = user_info
@@ -878,11 +867,11 @@ def onmessage(update,bot:ObigramClient):
             getUser['moodle_user'] = "--"
             getUser['moodle_password'] = "--"
             getUser['moodle_repo_id'] = 4
-            getUser['zips'] = 398
+            getUser['zips'] = 399
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Uclv cargada")
+            bot.editMessageText(message,"✅Configuración de UCLV cargada...")
 
         elif '/uvs' in msgText:
             getUser = user_info
@@ -895,12 +884,12 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Uvs cargada")
+            bot.editMessageText(message,"✅Configuración de Uvs cargada...")
 
         elif '/evea' in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://evea.uh.cu/"
-            getUser['uploadtype'] =  "calendarioevea"
+            getUser['uploadtype'] =  "calendarevea"
             getUser['moodle_user'] = "--"
             getUser['moodle_password'] = "--"
             getUser['moodle_repo_id'] = 4
@@ -908,7 +897,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Evea cargada")
+            bot.editMessageText(message,"✅Configuración de Evea cargada...")
         
         elif '/cursos' in msgText:
             getUser = user_info
@@ -921,7 +910,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Cursos cargada")
+            bot.editMessageText(message,"✅Configuración de Cursos cargada...")
         
         elif '/eva' in msgText:
             getUser = user_info
@@ -934,12 +923,12 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Eva cargada")
+            bot.editMessageText(message,"✅Configuración de Eva cargada...")
         
         elif "/artem" in msgText:
             getUser = user_info
             getUser['moodle_host'] = "http://www.aulavirtual.art.sld.cu/"
-            getUser['uploadtype'] =  "calendarioevea"
+            getUser['uploadtype'] =  "calendarevea"
             getUser['moodle_user'] = ""
             getUser['moodle_password'] = ""
             getUser['moodle_repo_id'] = 5
@@ -947,7 +936,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Aula Artemisa cargada")
+            bot.editMessageText(message,"✅Configuración de Aula Artemisa cargada...")
             
         elif '/eduvirtual' in msgText:
             getUser = user_info
@@ -960,12 +949,12 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Eduvirtual cargada")
+            bot.editMessageText(message,"✅Configuración de Eduvirtual cargada...")
         
         elif "/gtm" in msgText:
             getUser = user_info
             getUser['moodle_host'] = "https://aulauvs.gtm.sld.cu/"
-            getUser['uploadtype'] =  "calendarioevea"
+            getUser['uploadtype'] =  "calendarevea"
             getUser['moodle_user'] = ""
             getUser['moodle_password'] = ""
             getUser['moodle_repo_id'] = 4
@@ -973,7 +962,7 @@ def onmessage(update,bot:ObigramClient):
             jdb.save_data_user(username,getUser)
             jdb.save()
             statInfo = infos.createStat(username,getUser,jdb.is_admin(username))
-            bot.editMessageText(message,"✅Configuracion de Aula Guantanamo cargada")
+            bot.editMessageText(message,"✅Configuración de Aula Guantanamo cargada...")
         ###################################################     
   
         elif '/del_' in msgText and user_info['cloudtype']=='moodle':
