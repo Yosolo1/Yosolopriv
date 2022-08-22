@@ -96,18 +96,19 @@ def processUploadFiles(filename,filesize,files,update,bot,message,thread=None,jd
                     while resp is None:
                           if user_info['uploadtype'] == 'evidence':
                              fileid,resp = client.upload_file(f,evidence,fileid,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                          elif user_info['uploadtype'] == 'draft':
-                                fileid,resp = client.upload_file_draft(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
-                          elif user_info['uploadtype'] == 'perfil':
-                                fileid,resp = client.upload_file_perfil(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
-                          elif user_info['uploadtype'] == 'blog':
-                                fileid,resp = client.upload_file_blog(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
-                          elif user_info['uploadtype'] == 'calendar':
-                                fileid,resp = client.upload_file_calendar(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
-                                draftlist.append(resp)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'draft':
+                             fileid,resp = client.upload_file_draft(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'blog':
+                             fileid,resp = client.upload_file_blog(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'calendar':
+                             fileid,resp = client.upload_file_calendar(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
+                          if user_info['uploadtype'] == 'calendarioevea':
+                             fileid,resp = client.upload_file_calendarevea(f,progressfunc=uploadFile,args=(bot,message,originalfile,thread),tokenize=tokenize)
+                             draftlist.append(resp)
                           iter += 1
                           if iter>=10:
                               break
