@@ -14,8 +14,8 @@ def text_progres(index,max):
 		index_make = 1
 		make_text += '\n['
 		while(index_make<20):
-			if porcent >= index_make * 5: make_text+= '▪'
-			else: make_text+= '▫'
+			if porcent >= index_make * 5: make_text+= '✮'
+			else: make_text+= '✩'
 			index_make+=1
 		make_text += ']\n'
 		return make_text
@@ -119,30 +119,32 @@ def createFilesMsg(evfiles):
     return msg
 def createStat(username,userdata,isadmin):
     from pyobigram.utils import sizeof_fmt
-    msg = '⚙️𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝙲𝙸𝙾𝙽 𝙳𝙴 𝚄𝚂𝚄𝙰𝚁𝙸𝙾⚙️\n\n'
-    msg+= '➢ Nombre: ༺@' + str(username)+'༻\n'
-    msg+= '➢ Usuario: ' + str(userdata['moodle_user'])+'\n'
-    msg+= '➢ Contraseña: ' + str(userdata['moodle_password'])+'\n'
-    msg+= '➢ Url de nube: ' + str(userdata['moodle_host'])+'\n'
+    msg = '╭───ⓘ⚙️ℂ𝕆ℕ𝔽𝕀𝔾𝕌ℝ𝔸ℂ𝕀𝕆ℕ⚙️─〄\n|\n'
+    msg+= '├Nombre: ༺@' + str(username)+'༻\n'
+    msg+= '├Usuario: ' + str(userdata['moodle_user'])+'\n'
+    msg+= '├Contraseña: ' + str(userdata['moodle_password'])+'\n'
+    msg+= '├Url de nube: ' + str(userdata['moodle_host'])+'\n'
     if userdata['cloudtype'] == 'moodle':
-        msg+= '➢ Repo ID: ' + str(userdata['moodle_repo_id'])+'\n'
-    msg+= '➢ Tipo de nube: ' + str(userdata['cloudtype'])+'\n'
-    msg+= '➢ Tipo de Subida: ' + str(userdata['uploadtype'])+'\n'
+        msg+= '├Repo ID: ' + str(userdata['moodle_repo_id'])+'\n'
+    msg+= '├Tipo de almacén: ' + str(userdata['cloudtype'])+'\n'
+    msg+= '├Tipo de subida: ' + str(userdata['uploadtype'])+'\n'
     if userdata['cloudtype'] == 'cloud':
-        msg+= '➢ Directorio: /' + str(userdata['dir'])+'\n'
-    msg+= '➢ Tamaño de zips: ' + sizeof_fmt(userdata['zips']*1024*1024) + '\n\n'
+        msg+= '├Directorio: /' + str(userdata['dir'])+'\n'
+    msg+= '├Tamaño de zips: ' + sizeof_fmt(userdata['zips']*1024*1024) + '\n'
+    msg+= '│' + '\n'
     msgAdmin = 'NO'
     if isadmin:
         msgAdmin = 'SI'
-    msg+= '➢ Admin : ' + msgAdmin + '\n'
+    msg+= '├Admin : ' + msgAdmin + '\n'
     proxy = 'NO'
     if userdata['proxy'] !='':
        proxy = 'SI'
     tokenize = 'NO'
     if userdata['tokenize']!=0:
        tokenize = 'SI'
-    msg+= '➢ Proxy: ' + proxy + '\n'
-    msg+= '➢ Encriptar: ' + tokenize + '\n\n'
-    msg+= '⚙️𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝚁 𝙲𝚁𝙴𝙳𝙴𝙽𝙲𝙸𝙰𝙻𝙴𝚂⚙️\n Ejemplo: /acc usuario,contraseña'
+    msg+= '├Proxy: ' + proxy + '\n'
+    msg+= '├Encriptar: ' + tokenize + '\n'
+    msg+= '│' + '\n'
+    msg+= '╰ⓘSuperDownload 1.5🌟─〄\n\n'
     return msg
     
