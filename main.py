@@ -826,11 +826,11 @@ def onmessage(update,bot:ObigramClient):
                 bot.editMessageText(message2,'⚠️La moodle '+client.path+' no tiene Token o revise la cuenta⚠️')
         elif '/config' in msgText:
             msg_nub = "💡LISTA DE NUBES\n"
-            msg_nub += "☁️ Eduvirtual ☛ /eduvirtual\n"
+            msg_nub += "☁️ UCLV ☛ /uclv\n"
             msg_nub += "☁️ Aulacened ☛ /aulacened\n"
             msg_nub += "☁️ Cursos ☛ /cursos\n"
             msg_nub += "☁️ Evea ☛ /evea\n"
-            msg_nub += "☁️ Uclv ☛ /uclv\n"
+            msg_nub += "☁️ Eduvirtual ☛ /eduvirtual\n"
             msg_nub += "☁️ Eva ☛ /eva\n"
             msg_nub += "☁️ Art.sld ☛ /artem\n"   
             bot.editMessageText(message,msg_nub)
